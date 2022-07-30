@@ -1,5 +1,5 @@
-import Container from '../components/Container';
+import PageContainer from '../components/PageContainer';
 
 export default function Home() {
-	return <Container>hello</Container>;
+	return <PageContainer title="Bookshelves">hello</PageContainer>;
 }

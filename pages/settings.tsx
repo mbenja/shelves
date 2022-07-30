@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import Button from '../components/Button';
-import Container from '../components/Container';
+import PageContainer from '../components/PageContainer';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 
@@ -48,12 +48,12 @@ export default function Settings() {
 	}
 
 	return (
-		<Container>
+		<PageContainer title="Settings">
 			<div className="flex flex-col gap-8 md:w-1/4 w-full">
 				<div>
 					<Listbox value={theme} onChange={setTheme}>
 						<Listbox.Label className="font-semibold">Theme</Listbox.Label>
-						<Listbox.Button className="bg-neutral-100 dark:bg-neutral-600 flex focus:outline-none justify-between px-3 py-2 mt-2 rounded shadow w-full">
+						<Listbox.Button className="bg-neutral-100 dark:bg-neutral-600 flex focus:outline-none justify-between pl-3 pr-2 py-2 mt-2 rounded shadow w-full">
 							{themes.find((i) => i.value === theme)?.label}
 							<SelectorIcon className="h-5 my-auto w-5" />
 						</Listbox.Button>
@@ -84,6 +84,6 @@ export default function Settings() {
 				</div>
 				<Button text="Logout" onClick={handleLogout} />
 			</div>
-		</Container>
+		</PageContainer>
 	);
 }

@@ -5,8 +5,8 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 
 import Button from '../components/Button';
-import Container from '../components/Container';
 import Input from '../components/Input';
+import PageContainer from '../components/PageContainer';
 
 export default function Auth() {
 	const [isLogin, setIsLogin] = useState(true);
@@ -56,7 +56,7 @@ export default function Auth() {
 	}
 
 	return (
-		<Container>
+		<PageContainer>
 			<div className="flex flex-col h-full items-center justify-center">
 				<div className="flex flex-col gap-4 items-center md:w-1/4 w-2/3">
 					<h1 className="font-bold mb-4 text-3xl tracking-tight">shelves</h1>
@@ -102,6 +102,6 @@ export default function Auth() {
 					/>
 				</div>
 			</div>
-		</Container>
+		</PageContainer>
 	);
 }
