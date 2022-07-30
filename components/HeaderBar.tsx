@@ -48,8 +48,9 @@ function HeaderBarItem({
 	active: boolean;
 }) {
 	const classes = clsx(
-		active && 'bg-slate-200 font-semibold',
-		'hover:bg-slate-200 px-4 py-2 rounded transition'
+		active && 'bg-neutral-100 dark:bg-neutral-600 font-semibold',
+		!active && 'dark:hover:bg-neutral-600 hover:bg-neutral-300',
+		'px-4 py-2 rounded transition'
 	);
 
 	return (

@@ -19,6 +19,7 @@ main {
 	flex-grow: 1;
 }
 
+a,
 button {
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }

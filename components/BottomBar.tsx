@@ -16,7 +16,7 @@ export default function BottomBar() {
 	}
 
 	return (
-		<div className="bg-slate-200 flex justify-evenly md:hidden px-2 py-2">
+		<div className="bg-neutral-100 dark:bg-neutral-600 flex justify-evenly md:hidden px-2 py-2">
 			<BottomBarItem
 				icon={<ViewBoardsIcon className="h-7 m-auto w-7" />}
 				href={ROUTES.BOOKSHELVES}
