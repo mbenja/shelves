@@ -63,7 +63,6 @@ export default function Auth() {
 					<Input
 						onChange={(v: string) => setEmailText(v)}
 						placeholder="email"
-						type="text"
 						value={emailText}
 					/>
 					<Input
@@ -81,6 +80,7 @@ export default function Auth() {
 						/>
 					)}
 					<Button
+						expand
 						disabled={
 							!emailText ||
 							!passwordText ||

@@ -82,7 +82,7 @@ export default function Settings() {
 						</Transition>
 					</Listbox>
 				</div>
-				<Button text="Logout" onClick={handleLogout} />
+				<Button expand text="Logout" onClick={handleLogout} />
 			</div>
 		</PageContainer>
 	);
