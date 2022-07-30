@@ -57,7 +57,7 @@ export default function Auth() {
 
 	return (
 		<Container>
-			<div className="flex flex-col items-center justify-center h-full">
+			<div className="flex flex-col h-full items-center justify-center">
 				<div className="flex flex-col gap-4 items-center md:w-1/4 w-2/3">
 					<h1 className="font-bold mb-4 text-3xl tracking-tight">shelves</h1>
 					<Input
