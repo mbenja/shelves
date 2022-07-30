@@ -1,13 +1,17 @@
+import { signOut } from 'next-auth/react';
 import { useTheme } from 'next-themes';
+import { useRouter } from 'next/router';
 
 import { useEffect, useState } from 'react';
 
+import Button from '../components/Button';
 import Container from '../components/Container';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 
 export default function Settings() {
 	const [mounted, setMounted] = useState(false);
+	const router = useRouter();
 	const { theme, setTheme } = useTheme();
 	const themes = [
 		{
@@ -31,14 +35,22 @@ export default function Settings() {
 		setMounted(true);
 	}, []);
 
+	async function handleLogout(): Promise<void> {
+		const signOutResponse = await signOut({
+			redirect: false,
+			callbackUrl: '/auth'
+		});
+		router.push(signOutResponse.url);
+	}
+
 	if (!mounted) {
 		return null;
 	}
 
 	return (
 		<Container>
-			<div className="flex flex-col">
-				<div className="w-full md:w-1/4">
+			<div className="flex flex-col gap-8 md:w-1/4 w-full">
+				<div>
 					<Listbox value={theme} onChange={setTheme}>
 						<Listbox.Label className="font-semibold">Theme</Listbox.Label>
 						<Listbox.Button className="bg-neutral-100 dark:bg-neutral-600 flex focus:outline-none justify-between px-3 py-2 mt-2 rounded shadow w-full">
@@ -53,7 +65,7 @@ export default function Settings() {
 							leaveFrom="transform scale-100 opacity-100"
 							leaveTo="transform scale-95 opacity-0"
 						>
-							<Listbox.Options className="bg-neutral-100 dark:bg-neutral-600 cursor-pointer focus:outline-none mt-1 relative rounded shadow">
+							<Listbox.Options className="absolute bg-neutral-100 dark:bg-neutral-600 cursor-pointer focus:outline-none mt-1 rounded shadow w-full z-10">
 								{themes.map((theme) => (
 									<Listbox.Option key={theme.id} value={theme.value}>
 										{({ selected }) => (
@@ -70,6 +82,7 @@ export default function Settings() {
 						</Transition>
 					</Listbox>
 				</div>
+				<Button text="Logout" onClick={handleLogout} />
 			</div>
 		</Container>
 	);
