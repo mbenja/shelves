@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 
+import BookshelfList from '../components/BookshelfList';
 import Button from '../components/Button';
 import NewBookshelfModal from '../components/NewBookshelfModal';
 import PageContainer from '../components/PageContainer';
@@ -13,7 +14,7 @@ import { Bookshelf } from '@prisma/client';
 
 export default function Home() {
 	const [isNewBookshelfModalOpen, setIsNewBookshelfModalOpen] = useState(false);
-	const { bookshelves, isLoading, mutate } = useBookshelves();
+	const { bookshelves, mutate } = useBookshelves();
 	const router = useRouter();
 
 	async function handleCreateBookshelf(name: string): Promise<void> {
@@ -54,10 +55,7 @@ export default function Home() {
 				icon={<PlusIcon className="h-5 my-auto w-5" />}
 				onClick={() => setIsNewBookshelfModalOpen(true)}
 			/>
-			{isLoading && <div>loading bookshelves</div>}
-			{bookshelves && (
-				<div className="whitespace-pre">{JSON.stringify(bookshelves)}</div>
-			)}
+			<BookshelfList />
 		</PageContainer>
 	);
 }
