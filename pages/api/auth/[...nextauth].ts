@@ -7,6 +7,15 @@ import { PrismaAdapter } from '@next-auth/prisma-adapter';
 
 export default NextAuth({
 	adapter: PrismaAdapter(prisma),
+	callbacks: {
+		async jwt({ token, user }) {
+			if (user) {
+				token.userId = user.id;
+			}
+
+			return token;
+		}
+	},
 	pages: {
 		signIn: '/auth'
 	},

@@ -21,8 +21,8 @@ export default function NewBookshelfModal({
 	}
 
 	function handleSubmit(): void {
-		setName('');
 		onSubmit(name);
+		handleClose();
 	}
 
 	return (
