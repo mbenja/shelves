@@ -30,11 +30,7 @@ export default function Home() {
 		}).then(async (response) => {
 			if (response.status === 200) {
 				const newBookshelf: Bookshelf = await response.json();
-				const updatedBookshelves = bookshelves
-					? [...bookshelves, newBookshelf]
-					: [newBookshelf];
-
-				mutate({ ...updatedBookshelves });
+				mutate(bookshelves ? [...bookshelves, newBookshelf] : [newBookshelf]);
 			} else if (response.status === 401) {
 				router.push(ROUTES.AUTH);
 			} else {
