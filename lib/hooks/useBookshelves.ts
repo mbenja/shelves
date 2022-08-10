@@ -1,12 +1,10 @@
 import useSWR from 'swr';
 
-import fetcher from '../fetcher';
 import { Bookshelf } from '@prisma/client';
 
 export default function useBookshelves() {
 	const { data, error, mutate } = useSWR<Bookshelf[]>(
-		'/api/bookshelf/getBookshelves',
-		fetcher
+		'/api/bookshelf/getBookshelves'
 	);
 
 	return {

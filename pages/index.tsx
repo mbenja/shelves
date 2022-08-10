@@ -8,6 +8,7 @@ import Button from '../components/Button';
 import NewBookshelfModal from '../components/NewBookshelfModal';
 import PageContainer from '../components/PageContainer';
 import { ROUTES } from '../lib/constants';
+import { fetcher } from '../lib/fetcher';
 import useBookshelves from '../lib/hooks/useBookshelves';
 import { PlusIcon } from '@heroicons/react/solid';
 import { Bookshelf } from '@prisma/client';
@@ -18,25 +19,18 @@ export default function Home() {
 	const router = useRouter();
 
 	async function handleCreateBookshelf(name: string): Promise<void> {
-		fetch('/api/bookshelf/createBookshelf', {
-			method: 'POST',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				name
-			})
-		}).then(async (response) => {
-			if (response.status === 200) {
-				const newBookshelf: Bookshelf = await response.json();
-				mutate(bookshelves ? [...bookshelves, newBookshelf] : [newBookshelf]);
-			} else if (response.status === 401) {
-				router.push(ROUTES.AUTH);
-			} else {
-				toast(await response.json()).trim();
-			}
-		});
+		fetcher
+			.post('/api/bookshelf/createBookshelf', { name })
+			.then(async (response) => {
+				if (response.status === 200) {
+					const newBookshelf: Bookshelf = await response.json();
+					mutate(bookshelves ? [...bookshelves, newBookshelf] : [newBookshelf]);
+				} else if (response.status === 401) {
+					router.push(ROUTES.AUTH);
+				} else {
+					toast(await response.json()).trim();
+				}
+			});
 	}
 
 	return (

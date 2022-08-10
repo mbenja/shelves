@@ -18,16 +18,10 @@ export default async function handler(
 			}
 		});
 
-		return res.status(200).json({
-			status: 200,
-			data: newUser
-		});
+		return res.status(200).json(newUser);
 	} catch (error) {
 		const message = resolveErrorMessage(error);
 
-		return res.status(500).json({
-			status: 500,
-			message
-		});
+		return res.status(500).json(message);
 	}
 }

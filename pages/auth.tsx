@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import PageContainer from '../components/PageContainer';
+import { fetcher } from '../lib/fetcher';
 
 export default function Auth() {
 	const [isLogin, setIsLogin] = useState(true);
@@ -19,22 +20,17 @@ export default function Auth() {
 		if (isLogin) {
 			handleSignIn();
 		} else {
-			fetch('/api/auth/createUser', {
-				method: 'POST',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
+			fetcher
+				.post('/api/auth/createUser', {
 					email: emailText,
 					password: passwordText
 				})
-			})
-				.then((response: Response) => response.json())
-				.then((data) => {
-					data.status === 500
-						? toast((data.message as string).trim())
-						: handleSignIn();
+				.then(async (response) => {
+					if (response.status === 200) {
+						handleSignIn();
+					} else {
+						toast(await response.json()).trim();
+					}
 				});
 		}
 	}
