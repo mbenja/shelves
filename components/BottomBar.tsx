@@ -19,7 +19,7 @@ export default function BottomBar() {
 		<div className="bg-neutral-100 dark:bg-neutral-600 flex justify-evenly md:hidden px-2 py-2">
 			<BottomBarItem
 				icon={<ViewBoardsIcon className="h-7 m-auto w-7" />}
-				href={ROUTES.BOOKSHELVES}
+				href="/"
 			/>
 			<BottomBarItem
 				icon={<PresentationChartLineIcon className="h-7 m-auto w-7" />}

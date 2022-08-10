@@ -1,6 +1,6 @@
 export const ROUTES = {
 	AUTH: '/auth',
-	BOOKSHELVES: '/',
+	BOOKSHELVES: '/bookshelves',
 	STATISTICS: '/statistics',
 	SETTINGS: '/settings'
 };

@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import useBookshelves from '../lib/hooks/useBookshelves';
 import { Bookshelf } from '@prisma/client';
 
@@ -19,8 +21,10 @@ export default function BookshelfList() {
 
 function BookshelfCard({ bookshelf }: { bookshelf: Bookshelf }) {
 	return (
-		<div className="bg-neutral-100 cursor-pointer dark:bg-neutral-600 p-2 rounded shadow">
-			<p className="text-lg">{bookshelf.name}</p>
-		</div>
+		<Link href={`/bookshelves/${bookshelf.id}`} passHref>
+			<div className="bg-neutral-100 cursor-pointer dark:bg-neutral-600 p-2 rounded shadow">
+				<a className="text-lg">{bookshelf.name}</a>
+			</div>
+		</Link>
 	);
 }

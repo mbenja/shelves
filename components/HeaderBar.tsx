@@ -9,7 +9,10 @@ export default function HeaderBar() {
 	const router = useRouter();
 
 	function isHeaderBarItemActive(href: string): boolean {
-		return router.route === href;
+		return (
+			router.route.includes(href) ||
+			(href === ROUTES.BOOKSHELVES && router.route === '/')
+		);
 	}
 
 	if (router.route === ROUTES.AUTH) {
@@ -21,7 +24,7 @@ export default function HeaderBar() {
 			<div className="font-bold text-xl tracking-tight">shelves</div>
 			<HeaderBarItem
 				name="Bookshelves"
-				href={ROUTES.BOOKSHELVES}
+				href="/"
 				active={isHeaderBarItemActive(ROUTES.BOOKSHELVES)}
 			/>
 			<HeaderBarItem
