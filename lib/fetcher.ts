@@ -12,12 +12,18 @@ export async function swrFetcher<JSON = any>(
 }
 
 export const fetcher = {
-	post
+	post: (url: string, body: any) => fetchWrapper('POST', url, body),
+	put: (url: string, body: any) => fetchWrapper('PUT', url, body),
+	delete: (url: string, body: any) => fetchWrapper('DELETE', url, body)
 };
 
-async function post(url: string, body: any): Promise<Response> {
+async function fetchWrapper(
+	method: 'POST' | 'PUT' | 'DELETE',
+	url: string,
+	body: any
+): Promise<Response> {
 	return await fetch(url, {
-		method: 'POST',
+		method,
 		headers: {
 			Accept: 'application/json',
 			'Content-Type': 'application/json'

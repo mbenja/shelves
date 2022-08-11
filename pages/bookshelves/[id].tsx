@@ -27,7 +27,7 @@ export default function BookshelfComponent() {
 
 	async function handleRenameBookshelf(name: string): Promise<void> {
 		fetcher
-			.post('/api/bookshelf/renameBookshelf', { id: bookshelf?.id, name })
+			.put('/api/bookshelf/renameBookshelf', { id: bookshelf?.id, name })
 			.then(async (response) => {
 				if (response.ok) {
 					const updatedBookshelf: Bookshelf = await response.json();
@@ -40,7 +40,7 @@ export default function BookshelfComponent() {
 
 	async function handleDeleteBookshelf(): Promise<void> {
 		fetcher
-			.post('/api/bookshelf/deleteBookshelf', { id: bookshelf?.id })
+			.delete('/api/bookshelf/deleteBookshelf', { id: bookshelf?.id })
 			.then((response) => {
 				if (response.ok) {
 					router.push(ROUTES.HOME);
