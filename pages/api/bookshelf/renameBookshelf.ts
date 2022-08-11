@@ -12,14 +12,21 @@ export default async function handler(
 	if (!token) return res.status(401).end();
 
 	try {
-		const newBookshelf = await prisma.bookshelf.create({
+		const updatedBookshelf = await prisma.bookshelf.update({
+			where: {
+				id: req.body.id
+			},
 			data: {
-				userId: token.userId,
+				user: {
+					connect: {
+						id: token.userId
+					}
+				},
 				name: req.body.name
 			}
 		});
 
-		return res.status(200).json(newBookshelf);
+		return res.status(200).json(updatedBookshelf);
 	} catch (error) {
 		const message = resolveErrorMessage(error);
 		return res.status(500).json(message);

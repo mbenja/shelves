@@ -16,7 +16,7 @@ export const fetcher = {
 };
 
 async function post(url: string, body: any): Promise<Response> {
-	const res = await fetch(url, {
+	return await fetch(url, {
 		method: 'POST',
 		headers: {
 			Accept: 'application/json',
@@ -24,12 +24,6 @@ async function post(url: string, body: any): Promise<Response> {
 		},
 		body: JSON.stringify(body)
 	});
-
-	if (!res.ok) {
-		throw await buildError(res);
-	}
-
-	return res;
 }
 
 async function buildError(res: Response): Promise<Error> {

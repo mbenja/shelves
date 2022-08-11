@@ -35,8 +35,11 @@ export default function Dropdown({
 				<Menu.Items className="absolute right-0 bg-neutral-100 dark:bg-neutral-600 cursor-pointer flex flex-col focus:outline-none mt-1 rounded shadow w-fit z-10">
 					<div className="p-1">
 						{items.map((item) => (
-							<Menu.Item>
-								<button className="dark:hover:bg-neutral-500 hover:bg-neutral-300 flex px-2 py-2 rounded w-full">
+							<Menu.Item key={item.label}>
+								<button
+									className="dark:hover:bg-neutral-500 hover:bg-neutral-300 flex px-2 py-2 rounded w-full"
+									onClick={item.onClick}
+								>
 									<span
 										className={clsx(
 											item.danger && 'text-red-500',
