@@ -94,6 +94,7 @@ export default function Auth() {
 							type="submit"
 						/>
 						<Button
+							expand
 							fill="clear"
 							onClick={() => {
 								setIsLogin(!isLogin);

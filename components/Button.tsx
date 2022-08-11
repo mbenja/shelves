@@ -20,7 +20,7 @@ export default function Button(props: ButtonProps) {
 			: 'bg-transparent dark:text-gray-50 text-black',
 		disabled && 'opacity-70',
 		expand ? 'w-full' : 'w-fit',
-		'flex focus:outline-none font-semibold justify-center p-2 rounded'
+		'flex focus:outline-none font-semibold h-fit justify-center p-2 rounded'
 	);
 
 	return (
@@ -30,7 +30,7 @@ export default function Button(props: ButtonProps) {
 			onClick={disabled ? () => {} : onClick}
 			type={type ?? 'button'}
 		>
-			{icon}
+			{icon && <span className="h-5 my-auto w-5">{icon}</span>}
 			<span className={icon ? 'ml-2 mr-1' : ''}>{text}</span>
 		</button>
 	);

@@ -39,7 +39,7 @@ export default function Home() {
 			/>
 			<Button
 				text="New Bookshelf"
-				icon={<PlusIcon className="h-5 my-auto w-5" />}
+				icon={<PlusIcon />}
 				onClick={() => setIsNewBookshelfModalOpen(true)}
 			/>
 			<BookshelfList />
