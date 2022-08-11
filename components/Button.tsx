@@ -7,10 +7,11 @@ type ButtonProps = {
 	icon?: JSX.Element;
 	onClick: () => void;
 	text: string;
+	type?: 'button' | 'submit';
 };
 
 export default function Button(props: ButtonProps) {
-	const { disabled, expand, fill, icon, onClick, text } = props;
+	const { disabled, expand, fill, icon, onClick, text, type } = props;
 
 	let buttonFill = fill ?? 'solid';
 	let classes = clsx(
@@ -27,6 +28,7 @@ export default function Button(props: ButtonProps) {
 			className={classes}
 			disabled={disabled}
 			onClick={disabled ? () => {} : onClick}
+			type={type ?? 'button'}
 		>
 			{icon}
 			<span className={icon ? 'ml-2 mr-1' : ''}>{text}</span>

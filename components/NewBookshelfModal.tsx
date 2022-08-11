@@ -32,16 +32,24 @@ export default function NewBookshelfModal({
 			isOpen={isOpen}
 			onClose={handleClose}
 		>
-			<Input placeholder="name" value={name} onChange={(v) => setName(v)} />
-			<div className="flex gap-2 mt-4">
-				<Button expand text="Cancel" fill="clear" onClick={handleClose} />
-				<Button
-					expand
-					text="Submit"
-					disabled={name.length === 0}
-					onClick={handleSubmit}
-				/>
-			</div>
+			<form
+				onSubmit={(e) => {
+					e.preventDefault();
+					if (name.length !== 0) handleSubmit();
+				}}
+			>
+				<Input placeholder="name" value={name} onChange={(v) => setName(v)} />
+				<div className="flex gap-2 mt-4">
+					<Button expand text="Cancel" fill="clear" onClick={handleClose} />
+					<Button
+						expand
+						text="Submit"
+						disabled={name.length === 0}
+						onClick={handleSubmit}
+						type="submit"
+					/>
+				</div>
+			</form>
 		</Modal>
 	);
 }
