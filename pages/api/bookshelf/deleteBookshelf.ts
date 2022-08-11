@@ -12,19 +12,16 @@ export default async function handler(
 	if (!token) return res.status(401).end();
 
 	try {
-		const updatedBookshelf = await prisma.bookshelf.update({
+		await prisma.bookshelf.delete({
 			where: {
 				id_userId: {
 					id: req.body.id,
 					userId: token.userId
 				}
-			},
-			data: {
-				name: req.body.name
 			}
 		});
 
-		return res.status(200).json(updatedBookshelf);
+		return res.status(200).end();
 	} catch (error) {
 		const message = resolveErrorMessage(error);
 		return res.status(500).json(message);

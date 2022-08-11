@@ -19,7 +19,7 @@ export default function Button(props: ButtonProps) {
 			: 'bg-transparent dark:text-gray-50 text-black',
 		disabled && 'opacity-70',
 		expand ? 'w-full' : 'w-fit',
-		'flex font-semibold justify-center p-2 rounded'
+		'flex focus:outline-none font-semibold justify-center p-2 rounded'
 	);
 
 	return (

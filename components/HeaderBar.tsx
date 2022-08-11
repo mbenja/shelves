@@ -11,7 +11,7 @@ export default function HeaderBar() {
 	function isHeaderBarItemActive(href: string): boolean {
 		return (
 			router.route.includes(href) ||
-			(href === ROUTES.BOOKSHELVES && router.route === '/')
+			(href === ROUTES.BOOKSHELVES && router.route === ROUTES.HOME)
 		);
 	}
 

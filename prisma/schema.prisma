@@ -27,4 +27,6 @@ model Bookshelf {
   updatedAt DateTime @default(now())
 
   user      User @relation(fields: [userId], references: [id])
+
+  @@unique([id, userId])
 }
