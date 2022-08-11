@@ -5,10 +5,12 @@ import clsx from 'clsx';
 export default function PageContainer({
 	children,
 	forceShowTitle,
+	headerButtons,
 	title
 }: {
 	children: ReactNode;
 	forceShowTitle?: boolean;
+	headerButtons?: JSX.Element;
 	title?: string;
 }) {
 	const titleClasses = clsx(
@@ -18,7 +20,12 @@ export default function PageContainer({
 
 	return (
 		<div className="flex flex-col h-full p-2">
-			{title && <p className={titleClasses}>{title}</p>}
+			{(title || headerButtons) && (
+				<div className="flex justify-between">
+					{title && <p className={titleClasses}>{title}</p>}
+					{headerButtons}
+				</div>
+			)}
 			{children}
 		</div>
 	);
