@@ -1,5 +1,3 @@
-import { Fragment } from 'react';
-
 import clsx from 'clsx';
 
 import { Menu, Transition } from '@headlessui/react';
@@ -20,9 +18,13 @@ export default function Dropdown({
 }) {
 	return (
 		<Menu as="div" className="w-fit">
-			<Menu.Button className="bg-neutral-100 dark:bg-neutral-600 cursor-pointer flex focus:outline-none px-4 py-2 rounded shadow w-fit">
+			<Menu.Button className="bg-neutral-100 dark:bg-neutral-600 cursor-pointer flex focus:outline-none h-full px-4 py-2 rounded shadow w-fit">
 				{label}
-				{icon && <span className="h-4 ml-2 my-auto w-4">{icon}</span>}
+				{icon && (
+					<span className={clsx(label && 'ml-2', 'h-5 my-auto w-5')}>
+						{icon}
+					</span>
+				)}
 			</Menu.Button>
 			<Transition
 				enter="transition ease-out duration-100"

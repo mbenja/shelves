@@ -1,7 +1,7 @@
 type InputProps = {
 	onChange: (v: string) => void;
 	placeholder: string;
-	type?: 'password' | 'text';
+	type?: 'number' | 'password' | 'text';
 	value: string;
 };
 

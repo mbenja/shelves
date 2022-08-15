@@ -1,7 +1,9 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { useState } from 'react';
 
+import Button from '../../components/Button';
 import ConfirmationModal from '../../components/ConfirmationModal';
 import Dropdown from '../../components/Dropdown';
 import PageContainer from '../../components/PageContainer';
@@ -11,10 +13,11 @@ import { fetcher } from '../../lib/fetcher';
 import useBookshelf from '../../lib/hooks/useBookshelf';
 import { handleUnsuccessfulApiResponse } from '../../lib/util';
 import {
-	ChevronDownIcon,
+	DotsVerticalIcon,
 	PencilIcon,
 	TrashIcon
 } from '@heroicons/react/outline';
+import { PlusIcon } from '@heroicons/react/solid';
 import { Bookshelf } from '@prisma/client';
 
 export default function BookshelfComponent() {
@@ -54,23 +57,27 @@ export default function BookshelfComponent() {
 		<PageContainer
 			title={bookshelf ? bookshelf.name : 'Loading...'}
 			headerButtons={
-				<Dropdown
-					label="Options"
-					icon={<ChevronDownIcon />}
-					items={[
-						{
-							label: 'Rename',
-							icon: <PencilIcon />,
-							onClick: () => setIsRenameModalOpen(true)
-						},
-						{
-							label: 'Delete',
-							icon: <TrashIcon />,
-							danger: true,
-							onClick: () => setIsDeleteModalOpen(true)
-						}
-					]}
-				/>
+				<div className="flex gap-2 h-fit">
+					<Link href={`/bookshelves/${bookshelf?.id}/addBook`}>
+						<Button text="Add book" icon={<PlusIcon />} />
+					</Link>
+					<Dropdown
+						icon={<DotsVerticalIcon />}
+						items={[
+							{
+								label: 'Rename',
+								icon: <PencilIcon />,
+								onClick: () => setIsRenameModalOpen(true)
+							},
+							{
+								label: 'Delete',
+								icon: <TrashIcon />,
+								danger: true,
+								onClick: () => setIsDeleteModalOpen(true)
+							}
+						]}
+					/>
+				</div>
 			}
 			forceShowTitle
 		>

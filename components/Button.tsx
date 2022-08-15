@@ -5,7 +5,7 @@ type ButtonProps = {
 	expand?: boolean;
 	fill?: 'solid' | 'clear';
 	icon?: JSX.Element;
-	onClick: () => void;
+	onClick?: () => void;
 	text: string;
 	type?: 'button' | 'submit';
 };
@@ -20,7 +20,7 @@ export default function Button(props: ButtonProps) {
 			: 'bg-transparent dark:text-gray-50 text-black',
 		disabled && 'opacity-70',
 		expand ? 'w-full' : 'w-fit',
-		'flex focus:outline-none font-semibold h-fit justify-center p-2 rounded'
+		'flex focus:outline-none font-semibold h-fit justify-center p-2 rounded whitespace-nowrap'
 	);
 
 	return (
