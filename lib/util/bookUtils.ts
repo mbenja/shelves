@@ -46,7 +46,9 @@ export function resolveCover(
 	return '';
 }
 
-export function getAuthorsString(book: OpenLibraryBook): string {
+export function getAuthorsString(
+	book: OpenLibraryBook | (Book & { authors: Author[] })
+): string {
 	let authors = '';
 
 	book.authors.forEach((author, i) => {

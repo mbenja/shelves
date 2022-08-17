@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 
 import { useState } from 'react';
 
+import BookList from '../../components/BookList';
 import Button from '../../components/Button';
 import ConfirmationModal from '../../components/ConfirmationModal';
 import Dropdown from '../../components/Dropdown';
@@ -10,7 +11,6 @@ import PageContainer from '../../components/PageContainer';
 import RenameBookshelfModal from '../../components/RenameBookshelfModal';
 import { ROUTES } from '../../lib/constants';
 import { fetcher } from '../../lib/fetcher';
-import useBooks from '../../lib/hooks/useBooks';
 import useBookshelf from '../../lib/hooks/useBookshelf';
 import { handleUnsuccessfulApiResponse } from '../../lib/util';
 import {
@@ -25,10 +25,7 @@ export default function BookshelfComponent() {
 	const [isRenameModalOpen, setIsRenameModalOpen] = useState(false);
 	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 	const router = useRouter();
-	const { bookshelf, isLoading, mutate } = useBookshelf(
-		router.query['id'] ? (router.query['id'] as string) : undefined
-	);
-	const { books, isLoading: isLoadingBooks } = useBooks(
+	const { bookshelf, mutate } = useBookshelf(
 		router.query['id'] ? (router.query['id'] as string) : undefined
 	);
 
@@ -62,8 +59,10 @@ export default function BookshelfComponent() {
 			title={bookshelf ? bookshelf.name : 'Loading...'}
 			headerButtons={
 				<div className="flex gap-2 h-fit">
-					<Link href={`/bookshelves/${bookshelf?.id}/addBook`}>
-						<Button text="Add book" icon={<PlusIcon />} />
+					<Link href={`/bookshelves/${bookshelf?.id}/addBook`} passHref>
+						<a>
+							<Button text="Add book" icon={<PlusIcon />} />
+						</a>
 					</Link>
 					<Dropdown
 						icon={<DotsVerticalIcon />}
@@ -97,10 +96,9 @@ export default function BookshelfComponent() {
 				onClose={() => setIsDeleteModalOpen(false)}
 				onSubmit={handleDeleteBookshelf}
 			/>
-			{isLoading && <div>loading bookshelf</div>}
-			{bookshelf && <div>{JSON.stringify(bookshelf)}</div>}
-			{isLoadingBooks && <div>loading books</div>}
-			{books && <div>{JSON.stringify(books)}</div>}
+			{router.query['id'] && (
+				<BookList bookshelfId={router.query['id'] as string} />
+			)}
 		</PageContainer>
 	);
 }
