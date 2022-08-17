@@ -25,8 +25,40 @@ model Bookshelf {
   name      String
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
+  books     Book[]
 
   user      User @relation(fields: [userId], references: [id])
 
   @@unique([id, userId])
+}
+
+model Book {
+  id          String @id @default(cuid())
+  userId      String
+  bookshelfId String
+  authors     Author[] 
+  cover       String
+  isbn        String
+  pageCount   Int
+  publishDate DateTime
+  subtitle    String?
+  title       String
+  yearRead    Int?
+  rating      Int?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+
+  bookshelf   Bookshelf @relation(fields: [bookshelfId], references: [id])
+
+  @@unique([id, userId])
+}
+
+model Author {
+  id      String
+  bookId  String
+  name    String
+
+  book    Book @relation(fields: [bookId], references: [id])
+
+  @@unique([id, bookId])  
 }

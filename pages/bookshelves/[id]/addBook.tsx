@@ -5,9 +5,16 @@ import { useState } from 'react';
 import Button from '../../../components/Button';
 import Input from '../../../components/Input';
 import PageContainer from '../../../components/PageContainer';
+import { ROUTES } from '../../../lib/constants';
+import { fetcher } from '../../../lib/fetcher';
 import useBookshelf from '../../../lib/hooks/useBookshelf';
 import useOpenLibraryBook from '../../../lib/hooks/useOpenLibraryBook';
-import { OpenLibraryBook } from '../../../lib/types/openLibrary';
+import { handleUnsuccessfulApiResponse } from '../../../lib/util';
+import {
+	getAuthorsString,
+	mapOpenLibraryBookToBook,
+	resolveCover
+} from '../../../lib/util/bookUtils';
 import { StarIcon } from '@heroicons/react/solid';
 
 export default function AddBook() {
@@ -24,17 +31,28 @@ export default function AddBook() {
 
 	const openLibraryBook = response ? response[`ISBN:${ISBN}`] : null;
 
-	function getAuthorsString(book: OpenLibraryBook): string {
-		let authors = '';
+	async function handleAddBook(): Promise<void> {
+		if (!openLibraryBook || !bookshelf) return;
 
-		book.authors.forEach((author, i) => {
-			authors += ` ${author.name}`;
-			if (i !== book.authors.length - 1) {
-				authors += ',';
-			}
-		});
-
-		return authors;
+		fetcher
+			.post('/api/book/createBook', {
+				book: {
+					...mapOpenLibraryBookToBook(
+						openLibraryBook,
+						bookshelf.id,
+						customCoverUrl
+					),
+					rating: starRating,
+					yearRead
+				}
+			})
+			.then(async (response) => {
+				if (response.ok) {
+					router.push(`${ROUTES.BOOKSHELVES}/${router.query['id']}`);
+				} else {
+					handleUnsuccessfulApiResponse(response, router);
+				}
+			});
 	}
 
 	return (
@@ -61,7 +79,7 @@ export default function AddBook() {
 						<div className="flex gap-2 md:gap-4">
 							<img
 								className="h-64 md:h-80 rounded-md shadow-md"
-								src={openLibraryBook.cover?.large}
+								src={resolveCover(openLibraryBook, customCoverUrl)}
 							/>
 							<div className="flex flex-col gap-4">
 								<div className="">
@@ -103,7 +121,7 @@ export default function AddBook() {
 							onClick={() => setShouldFetch(false)}
 							expand
 						/>
-						<Button text="Add to Bookshelf" expand />
+						<Button text="Add to Bookshelf" onClick={handleAddBook} expand />
 					</div>
 				</div>
 			)}
