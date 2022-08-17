@@ -10,6 +10,7 @@ import PageContainer from '../../components/PageContainer';
 import RenameBookshelfModal from '../../components/RenameBookshelfModal';
 import { ROUTES } from '../../lib/constants';
 import { fetcher } from '../../lib/fetcher';
+import useBooks from '../../lib/hooks/useBooks';
 import useBookshelf from '../../lib/hooks/useBookshelf';
 import { handleUnsuccessfulApiResponse } from '../../lib/util';
 import {
@@ -25,6 +26,9 @@ export default function BookshelfComponent() {
 	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 	const router = useRouter();
 	const { bookshelf, isLoading, mutate } = useBookshelf(
+		router.query['id'] ? (router.query['id'] as string) : undefined
+	);
+	const { books, isLoading: isLoadingBooks } = useBooks(
 		router.query['id'] ? (router.query['id'] as string) : undefined
 	);
 
@@ -95,6 +99,8 @@ export default function BookshelfComponent() {
 			/>
 			{isLoading && <div>loading bookshelf</div>}
 			{bookshelf && <div>{JSON.stringify(bookshelf)}</div>}
+			{isLoadingBooks && <div>loading books</div>}
+			{books && <div>{JSON.stringify(books)}</div>}
 		</PageContainer>
 	);
 }
