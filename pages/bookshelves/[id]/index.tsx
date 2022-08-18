@@ -3,16 +3,16 @@ import { useRouter } from 'next/router';
 
 import { useState } from 'react';
 
-import BookList from '../../components/BookList';
-import Button from '../../components/Button';
-import ConfirmationModal from '../../components/ConfirmationModal';
-import Dropdown from '../../components/Dropdown';
-import PageContainer from '../../components/PageContainer';
-import RenameBookshelfModal from '../../components/RenameBookshelfModal';
-import { ROUTES } from '../../lib/constants';
-import { fetcher } from '../../lib/fetcher';
-import useBookshelf from '../../lib/hooks/useBookshelf';
-import { handleUnsuccessfulApiResponse } from '../../lib/util';
+import BookList from '../../../components/BookList';
+import Button from '../../../components/Button';
+import ConfirmationModal from '../../../components/ConfirmationModal';
+import Dropdown from '../../../components/Dropdown';
+import PageContainer from '../../../components/PageContainer';
+import RenameBookshelfModal from '../../../components/RenameBookshelfModal';
+import { ROUTES } from '../../../lib/constants';
+import { fetcher } from '../../../lib/fetcher';
+import useBookshelf from '../../../lib/hooks/useBookshelf';
+import { handleUnsuccessfulApiResponse } from '../../../lib/util';
 import {
 	DotsVerticalIcon,
 	PencilIcon,

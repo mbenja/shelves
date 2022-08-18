@@ -22,7 +22,7 @@ export default function BookList({ bookshelfId }: { bookshelfId: string }) {
 
 function BookCard({ book }: { book: Book & { authors: Author[] } }) {
 	return (
-		<Link href="">
+		<Link href={`/bookshelves/${book.bookshelfId}/book/${book.id}`}>
 			<a className="bg-neutral-100 cursor-pointer dark:bg-neutral-600 flex rounded shadow">
 				<img
 					src={book.cover}
