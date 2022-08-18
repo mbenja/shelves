@@ -14,7 +14,7 @@ export default async function handler(
 	try {
 		const books = await prisma.book.findMany({
 			where: {
-				bookshelfId: req.query['bookshelfId'] as string,
+				bookshelfId: req.query['id'] as string,
 				userId: token.userId
 			},
 			include: {
