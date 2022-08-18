@@ -82,7 +82,6 @@ export default function BookshelfComponent() {
 					/>
 				</div>
 			}
-			forceShowTitle
 		>
 			<RenameBookshelfModal
 				isOpen={isRenameModalOpen}

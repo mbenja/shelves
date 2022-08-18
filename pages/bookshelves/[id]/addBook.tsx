@@ -56,7 +56,7 @@ export default function AddBook() {
 	}
 
 	return (
-		<PageContainer title={`Add a Book to ${bookshelf?.name}`} forceShowTitle>
+		<PageContainer title={`Add a Book to ${bookshelf?.name}`}>
 			{!openLibraryBook && (
 				<div className="flex flex-col gap-2 md:w-1/4 w-full">
 					<p>Enter your book's ISBN to get started.</p>

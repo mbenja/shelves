@@ -31,16 +31,20 @@ export default function Home() {
 	}
 
 	return (
-		<PageContainer title="Bookshelves">
+		<PageContainer
+			title="Bookshelves"
+			headerButtons={
+				<Button
+					text="New Bookshelf"
+					icon={<PlusIcon />}
+					onClick={() => setIsNewBookshelfModalOpen(true)}
+				/>
+			}
+		>
 			<NewBookshelfModal
 				isOpen={isNewBookshelfModalOpen}
 				onClose={() => setIsNewBookshelfModalOpen(false)}
 				onSubmit={(v) => handleCreateBookshelf(v)}
-			/>
-			<Button
-				text="New Bookshelf"
-				icon={<PlusIcon />}
-				onClick={() => setIsNewBookshelfModalOpen(true)}
 			/>
 			<BookshelfList />
 		</PageContainer>
