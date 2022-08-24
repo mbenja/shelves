@@ -31,7 +31,7 @@ function BookCard({ book }: { book: Book & { authors: Author[] } }) {
 				<div className="flex flex-col p-2">
 					<p className="text-lg">{book.title}</p>
 					<p className="italic text-sm">{book.subtitle}</p>
-					<p className="text-sm">By: {getAuthorsString(book)}</p>
+					<p className="text-sm">By: {getAuthorsString(book.authors)}</p>
 					<p className="text-sm">{book.pageCount} pages</p>
 				</div>
 			</a>

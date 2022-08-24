@@ -33,22 +33,23 @@ model Bookshelf {
 }
 
 model Book {
-  id          String @id @default(cuid())
-  userId      String
-  bookshelfId String
-  authors     Author[] 
-  cover       String
-  isbn        String
-  pageCount   Int
-  publishDate DateTime
-  subtitle    String?
-  title       String
-  yearRead    Int?
-  rating      Int?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @default(now())
+  id              String @id @default(cuid())
+  userId          String
+  bookshelfId     String
+  authors         Author[] 
+  cover           String
+  hasCustomCover  Boolean
+  isbn            String
+  pageCount       Int
+  publishDate     DateTime
+  subtitle        String?
+  title           String
+  yearRead        Int?
+  rating          Int?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @default(now())
 
-  bookshelf   Bookshelf @relation(fields: [bookshelfId], references: [id])
+  bookshelf       Bookshelf @relation(fields: [bookshelfId], references: [id])
 
   @@unique([id, userId])
 }

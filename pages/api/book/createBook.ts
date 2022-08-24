@@ -22,6 +22,7 @@ export default async function handler(
 				},
 				userId: token.userId,
 				cover: req.body.book.cover,
+				hasCustomCover: req.body.book.hasCustomCover,
 				isbn: req.body.book.isbn,
 				pageCount: req.body.book.pageCount,
 				publishDate: req.body.book.publishDate,

@@ -3,8 +3,7 @@ import { Author, Book } from '@prisma/client';
 
 export function mapOpenLibraryBookToBook(
 	book: OpenLibraryBook,
-	bookshelfId: string,
-	customCoverUrl?: string
+	bookshelfId: string
 ): Partial<Book> & {
 	authors: Partial<Author>[];
 } {
@@ -14,7 +13,8 @@ export function mapOpenLibraryBookToBook(
 			book.authors.map((author) => {
 				return { id: getAuthorIdFromUrl(author.url), name: author.name };
 			}) ?? [],
-		cover: resolveCover(book, customCoverUrl),
+		cover: resolveCover(book),
+		hasCustomCover: false,
 		isbn: resolveISBN(book),
 		pageCount: book.number_of_pages,
 		publishDate: book.publish_date ? new Date(book.publish_date) : undefined,
@@ -33,12 +33,7 @@ export function resolveISBN(book: OpenLibraryBook): string {
 	return '';
 }
 
-export function resolveCover(
-	book: OpenLibraryBook,
-	customUrl?: string
-): string {
-	if (customUrl) return customUrl;
-
+export function resolveCover(book: OpenLibraryBook): string {
 	if (book.cover?.large) return book.cover.large;
 	if (book.cover?.medium) return book.cover.medium;
 	if (book.cover?.small) return book.cover.small;
@@ -46,19 +41,17 @@ export function resolveCover(
 	return '';
 }
 
-export function getAuthorsString(
-	book: OpenLibraryBook | (Book & { authors: Author[] })
-): string {
-	let authors = '';
+export function getAuthorsString(authors: Partial<Author>[]): string {
+	let authorsString = '';
 
-	book.authors.forEach((author, i) => {
-		authors += ` ${author.name}`;
-		if (i !== book.authors.length - 1) {
-			authors += ',';
+	authors.forEach((author, i) => {
+		authorsString += ` ${author.name}`;
+		if (i !== authors.length - 1) {
+			authorsString += ',';
 		}
 	});
 
-	return authors;
+	return authorsString;
 }
 
 function getAuthorIdFromUrl(url: string): string {
