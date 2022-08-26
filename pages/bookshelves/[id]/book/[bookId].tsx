@@ -4,10 +4,12 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
 import Button from '../../../../components/Button';
+import ConfirmationModal from '../../../../components/ConfirmationModal';
 import Dropdown from '../../../../components/Dropdown';
 import Input from '../../../../components/Input';
 import PageContainer from '../../../../components/PageContainer';
 import StarRating from '../../../../components/StarRating';
+import { ROUTES } from '../../../../lib/constants';
 import { fetcher } from '../../../../lib/fetcher';
 import useBook from '../../../../lib/hooks/useBook';
 import { handleUnsuccessfulApiResponse } from '../../../../lib/util';
@@ -22,6 +24,7 @@ export default function BookComponent() {
 	const [starRating, setStarRating] = useState<number | null>(null);
 	const [yearRead, setYearRead] = useState<number | null>(null);
 	const [customCoverUrl, setCustomCoverUrl] = useState('');
+	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
 	async function handleSaveBook(): Promise<void> {
 		fetcher
@@ -37,6 +40,20 @@ export default function BookComponent() {
 			.then(async (response) => {
 				if (response.ok) {
 					toast(`${book?.title} has been updated`);
+				} else {
+					handleUnsuccessfulApiResponse(response, router);
+				}
+			});
+	}
+
+	async function handleDeleteBook(): Promise<void> {
+		fetcher
+			.post('/api/book/deleteBook', {
+				id: book?.id
+			})
+			.then(async (response) => {
+				if (response.ok) {
+					router.push(`${ROUTES.BOOKSHELVES}/${book?.bookshelfId}`);
 				} else {
 					handleUnsuccessfulApiResponse(response, router);
 				}
@@ -72,12 +89,19 @@ export default function BookComponent() {
 							label: 'Delete',
 							icon: <TrashIcon />,
 							danger: true,
-							onClick: () => {}
+							onClick: () => setIsDeleteModalOpen(true)
 						}
 					]}
 				/>
 			}
 		>
+			<ConfirmationModal
+				title="Delete Book"
+				description="Are you sure you'd like to delete this book?"
+				isOpen={isDeleteModalOpen}
+				onClose={() => setIsDeleteModalOpen(false)}
+				onSubmit={handleDeleteBook}
+			/>
 			{isLoading && <div>loading book</div>}
 			{book && (
 				<div className="flex flex-col gap-2 md:gap-6 md:w-1/2 w-full">
