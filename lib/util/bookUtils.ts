@@ -16,7 +16,7 @@ export function mapOpenLibraryBookToBook(
 		cover: resolveCover(book),
 		hasCustomCover: false,
 		isbn: resolveISBN(book),
-		pageCount: book.number_of_pages,
+		pageCount: book.number_of_pages ?? 0,
 		publishDate: book.publish_date ? new Date(book.publish_date) : undefined,
 		subtitle: book.subtitle,
 		title: book.title
