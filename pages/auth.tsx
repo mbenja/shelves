@@ -92,7 +92,7 @@ export default function Auth() {
 							text={isLogin ? 'Login' : 'Sign Up'}
 							type="submit"
 						/>
-						<Button
+						{/* <Button
 							expand
 							fill="clear"
 							onClick={() => {
@@ -103,7 +103,7 @@ export default function Auth() {
 									? 'Need to create an account?'
 									: 'Already have an account?'
 							}
-						/>
+						/> */}
 					</form>
 				</div>
 			</div>
