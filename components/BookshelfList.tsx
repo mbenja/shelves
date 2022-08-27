@@ -11,7 +11,7 @@ export default function BookshelfList() {
 	}
 
 	return (
-		<div className="gap-2 grid grid-cols-1 md:grid-cols-4 max-h-full my-4 overflow-auto">
+		<div className="gap-2 grid grid-cols-1 md:grid-cols-4 max-h-full my-4 overflow-y-auto">
 			{bookshelves?.map((bookshelf) => (
 				<BookshelfCard key={bookshelf.id} bookshelf={bookshelf} />
 			))}

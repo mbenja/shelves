@@ -12,7 +12,7 @@ export default function BookList({ bookshelfId }: { bookshelfId: string }) {
 	}
 
 	return (
-		<div className="gap-2 grid grid-cols-1 lg:grid-cols-3 max-h-full py-4 overflow-auto sm:grid-cols-2">
+		<div className="gap-2 grid grid-cols-1 lg:grid-cols-3 max-h-full py-4 overflow-y-auto sm:grid-cols-2">
 			{books?.map((book) => (
 				<BookCard key={book.id} book={book} />
 			))}
