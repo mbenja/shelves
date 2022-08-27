@@ -11,7 +11,7 @@ export default function BookshelfList() {
 	}
 
 	return (
-		<div className="gap-2 grid grid-cols-1 md:grid-cols-4 max-h-full my-4 overflow-y-auto">
+		<div className="gap-2 grid grid-cols-1 md:grid-cols-4 max-h-full mb-4 overflow-y-auto">
 			{bookshelves?.map((bookshelf) => (
 				<BookshelfCard key={bookshelf.id} bookshelf={bookshelf} />
 			))}
@@ -22,7 +22,7 @@ export default function BookshelfList() {
 function BookshelfCard({ bookshelf }: { bookshelf: Bookshelf }) {
 	return (
 		<Link href={`/bookshelves/${bookshelf.id}`} passHref>
-			<div className="bg-neutral-100 cursor-pointer dark:bg-neutral-600 p-2 rounded shadow">
+			<div className="bg-neutral-100 cursor-pointer dark:bg-neutral-600 p-4 rounded shadow">
 				<a className="text-lg">{bookshelf.name}</a>
 			</div>
 		</Link>

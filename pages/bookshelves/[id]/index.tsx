@@ -11,6 +11,7 @@ import PageContainer from '../../../components/PageContainer';
 import RenameBookshelfModal from '../../../components/RenameBookshelfModal';
 import { ROUTES } from '../../../lib/constants';
 import { fetcher } from '../../../lib/fetcher';
+import useBooks from '../../../lib/hooks/useBooks';
 import useBookshelf from '../../../lib/hooks/useBookshelf';
 import { handleUnsuccessfulApiResponse } from '../../../lib/util';
 import {
@@ -25,9 +26,11 @@ export default function BookshelfComponent() {
 	const [isRenameModalOpen, setIsRenameModalOpen] = useState(false);
 	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 	const router = useRouter();
-	const { bookshelf, mutate } = useBookshelf(
-		router.query['id'] ? (router.query['id'] as string) : undefined
-	);
+	const bookshelfId = router.query['id']
+		? (router.query['id'] as string)
+		: undefined;
+	const { bookshelf, mutate } = useBookshelf(bookshelfId);
+	const { books } = useBooks(bookshelfId);
 
 	async function handleRenameBookshelf(name: string): Promise<void> {
 		fetcher
@@ -57,6 +60,7 @@ export default function BookshelfComponent() {
 	return (
 		<PageContainer
 			title={bookshelf ? bookshelf.name : 'Loading...'}
+			subtitle={<p>{books?.length ?? 0} books</p>}
 			headerButtons={
 				<div className="flex gap-2 h-fit">
 					<Link href={`/bookshelves/${bookshelf?.id}/addBook`} passHref>

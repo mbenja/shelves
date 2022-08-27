@@ -33,6 +33,7 @@ export default function Home() {
 	return (
 		<PageContainer
 			title="Bookshelves"
+			subtitle={<p>{bookshelves?.length ?? 0} bookshelves</p>}
 			headerButtons={
 				<Button
 					text="New Bookshelf"
