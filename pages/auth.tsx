@@ -89,7 +89,6 @@ export default function Auth() {
 								!passwordText ||
 								(!isLogin && passwordText !== confirmPasswordText)
 							}
-							onClick={handleAuth}
 							text={isLogin ? 'Login' : 'Sign Up'}
 							type="submit"
 						/>
