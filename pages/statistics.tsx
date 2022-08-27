@@ -13,7 +13,7 @@ export default function Statistics() {
 			{stats && (
 				<div className="gap-2 grid grid-cols-1 lg:grid-cols-3 max-h-full py-4 overflow-y-auto-auto sm:grid-cols-2">
 					{stats.map((stat) => (
-						<StatisticCard stat={stat} />
+						<StatisticCard key={`stat-${stat.year}`} stat={stat} />
 					))}
 				</div>
 			)}

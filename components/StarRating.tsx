@@ -20,6 +20,7 @@ export default function StarRating({
 			<div className="flex gap-2 justify-center">
 				{stars.map((star, i) => (
 					<span
+						key={`star-${i}`}
 						className="cursor-pointer h-6 w-6"
 						onClick={() => onChange(i + 1)}
 					>

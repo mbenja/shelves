@@ -58,7 +58,7 @@ export default function AddBook() {
 		<PageContainer title={`Add a Book to ${bookshelf?.name}`}>
 			{!book && (
 				<div className="flex flex-col gap-2 md:w-1/4 w-full">
-					<p>Enter your book's ISBN to get started.</p>
+					<p>Enter your book&apos;s ISBN to get started.</p>
 					<Input placeholder="ISBN" value={ISBN} onChange={(v) => setISBN(v)} />
 					<Button
 						text="Search"
@@ -71,8 +71,8 @@ export default function AddBook() {
 			{book && (
 				<div className="flex flex-col gap-4 md:w-1/2 w-full">
 					<p>
-						Here's what we found. Add additional details or send it straight to
-						your bookshelf.
+						Here&apos;s what we found. Add additional details or send it
+						straight to your bookshelf.
 					</p>
 					<div className="flex flex-col gap-6">
 						<div className="flex gap-2 md:gap-4">
