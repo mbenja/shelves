@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { getToken } from 'next-auth/jwt';
 
 import { resolveErrorMessage } from '../../../lib/util';
-import prisma from '../../../prisma';
+import { prisma } from '../../../prisma';
 import { Author } from '@prisma/client';
 
 export default async function handler(
