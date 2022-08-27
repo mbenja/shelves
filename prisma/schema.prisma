@@ -17,6 +17,7 @@ model User {
   updatedAt   DateTime @default(now())
 
   bookshelves Bookshelf[]
+  goals       Goal[]
 }
 
 model Bookshelf {
@@ -62,4 +63,15 @@ model Author {
   book    Book @relation(fields: [bookId], references: [id], onDelete: Cascade)
 
   @@unique([id, bookId])  
+}
+
+model Goal {
+  id      String @id @default(cuid())
+  userId  String
+  year    Int
+  value   Int
+
+  user  User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, year])
 }
