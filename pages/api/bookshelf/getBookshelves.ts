@@ -15,6 +15,9 @@ export default async function handler(
 		const bookshelves = await prisma.bookshelf.findMany({
 			where: {
 				userId: token.userId
+			},
+			orderBy: {
+				name: 'desc'
 			}
 		});
 
