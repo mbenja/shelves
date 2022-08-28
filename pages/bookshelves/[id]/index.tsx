@@ -98,6 +98,7 @@ export default function BookshelfComponent() {
 				isOpen={isDeleteModalOpen}
 				onClose={() => setIsDeleteModalOpen(false)}
 				onSubmit={handleDeleteBookshelf}
+				isDestructive
 			/>
 			{router.query['id'] && (
 				<BookList bookshelfId={router.query['id'] as string} />

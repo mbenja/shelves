@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 
 type ButtonProps = {
+	danger?: boolean;
 	disabled?: boolean;
 	expand?: boolean;
 	fill?: 'solid' | 'clear';
@@ -11,12 +12,13 @@ type ButtonProps = {
 };
 
 export default function Button(props: ButtonProps) {
-	const { disabled, expand, fill, icon, onClick, text, type } = props;
+	const { danger, disabled, expand, fill, icon, onClick, text, type } = props;
 
-	let buttonFill = fill ?? 'solid';
+	const bgColor = danger ? 'bg-red-500' : 'bg-purple-500';
+	const buttonFill = fill ?? 'solid';
 	let classes = clsx(
 		buttonFill === 'solid'
-			? 'bg-purple-500 shadow text-gray-50'
+			? `${bgColor} shadow text-gray-50`
 			: 'bg-transparent dark:text-gray-50 text-black',
 		disabled && 'opacity-70',
 		expand ? 'w-full' : 'w-fit',

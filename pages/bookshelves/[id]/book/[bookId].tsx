@@ -109,6 +109,7 @@ export default function BookComponent() {
 				isOpen={isDeleteModalOpen}
 				onClose={() => setIsDeleteModalOpen(false)}
 				onSubmit={handleDeleteBook}
+				isDestructive
 			/>
 			{isLoading && <div>loading book</div>}
 			{book && (

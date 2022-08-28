@@ -4,12 +4,14 @@ import Modal from './Modal';
 export default function ConfirmationModal({
 	title,
 	description,
+	isDestructive,
 	isOpen,
 	onClose,
 	onSubmit
 }: {
 	title: string;
 	description: string;
+	isDestructive: boolean;
 	isOpen: boolean;
 	onClose: () => void;
 	onSubmit: () => void;
@@ -28,7 +30,12 @@ export default function ConfirmationModal({
 		>
 			<div className="flex gap-2 mt-4">
 				<Button expand text="Cancel" fill="clear" onClick={onClose} />
-				<Button expand text="Confirm" onClick={handleSubmit} />
+				<Button
+					danger={isDestructive}
+					expand
+					text="Confirm"
+					onClick={handleSubmit}
+				/>
 			</div>
 		</Modal>
 	);
