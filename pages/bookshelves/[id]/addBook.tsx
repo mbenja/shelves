@@ -15,7 +15,7 @@ import {
 	getAuthorsString,
 	mapOpenLibraryBookToBook
 } from '../../../lib/util/bookUtils';
-import { StarIcon } from '@heroicons/react/solid';
+import { QuestionMarkCircleIcon, StarIcon } from '@heroicons/react/solid';
 
 export default function AddBook() {
 	const [ISBN, setISBN] = useState('');
@@ -76,10 +76,16 @@ export default function AddBook() {
 					</p>
 					<div className="flex flex-col gap-6">
 						<div className="flex gap-2 md:gap-4">
-							<img
-								className="h-64 md:h-80 rounded-md shadow-md"
-								src={customCoverUrl.length > 0 ? customCoverUrl : book.cover}
-							/>
+							{book.cover || customCoverUrl ? (
+								<img
+									className="h-64 md:h-96 rounded-md shadow-md"
+									src={customCoverUrl.length > 0 ? customCoverUrl : book.cover}
+								/>
+							) : (
+								<div className="border border-neutral-400 flex flex-col h-64 justify-center md:h-96 md:w-60 rounded-md w-44">
+									<QuestionMarkCircleIcon className="h-28 m-auto w-28" />
+								</div>
+							)}
 							<div className="flex flex-col gap-4">
 								<div className="">
 									<p className="font-semibold text-lg">{book.title}</p>

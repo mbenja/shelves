@@ -14,7 +14,11 @@ import { fetcher } from '../../../../lib/fetcher';
 import useBook from '../../../../lib/hooks/useBook';
 import { handleUnsuccessfulApiResponse } from '../../../../lib/util';
 import { getAuthorsString } from '../../../../lib/util/bookUtils';
-import { DotsVerticalIcon, TrashIcon } from '@heroicons/react/solid';
+import {
+	DotsVerticalIcon,
+	QuestionMarkCircleIcon,
+	TrashIcon
+} from '@heroicons/react/solid';
 
 export default function BookComponent() {
 	const router = useRouter();
@@ -25,13 +29,17 @@ export default function BookComponent() {
 	const [yearRead, setYearRead] = useState<number | null>(null);
 	const [customCoverUrl, setCustomCoverUrl] = useState('');
 	const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+	const resolvedCoverUrl =
+		book?.hasCustomCover || customCoverUrl.length > 0
+			? customCoverUrl
+			: book?.cover;
 
 	async function handleSaveBook(): Promise<void> {
 		fetcher
 			.post('/api/book/updateBook', {
 				book: {
 					id: book?.id,
-					cover: customCoverUrl.length > 0 ? customCoverUrl : book?.cover,
+					cover: resolvedCoverUrl,
 					hasCustomCover: customCoverUrl.length > 0,
 					rating: starRating,
 					yearRead
@@ -106,10 +114,16 @@ export default function BookComponent() {
 			{book && (
 				<div className="flex flex-col gap-2 md:gap-6 md:w-1/2 w-full">
 					<div className="flex gap-2 md:gap-6">
-						<img
-							src={book.cover}
-							className="h-64 md:h-96 rounded-md shadow-md"
-						/>
+						{resolvedCoverUrl ? (
+							<img
+								src={resolvedCoverUrl}
+								className="h-64 md:h-96 rounded-md shadow-md"
+							/>
+						) : (
+							<div className="border border-neutral-400 flex flex-col h-64 justify-center md:h-96 md:w-60 rounded-md w-44">
+								<QuestionMarkCircleIcon className="h-28 m-auto w-28" />
+							</div>
+						)}
 						<div className="flex flex-col gap-4">
 							<StarRating
 								rating={starRating}
