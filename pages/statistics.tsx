@@ -1,4 +1,5 @@
 import GoalComponent from '../components/Goal';
+import LoadingIndicator from '../components/LoadingIndicator';
 import PageContainer from '../components/PageContainer';
 import StatisticCard from '../components/StatisticCard';
 import useStats from '../lib/hooks/useStats';
@@ -8,7 +9,7 @@ export default function Statistics() {
 
 	return (
 		<PageContainer title="Statistics">
-			{isLoading && <div>loading statistics</div>}
+			{isLoading && <LoadingIndicator />}
 			<GoalComponent />
 			{stats && (
 				<div className="gap-2 grid grid-cols-1 lg:grid-cols-3 max-h-full py-4 overflow-y-auto-auto sm:grid-cols-2">

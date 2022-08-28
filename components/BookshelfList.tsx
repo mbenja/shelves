@@ -1,13 +1,14 @@
 import Link from 'next/link';
 
 import useBookshelves from '../lib/hooks/useBookshelves';
+import LoadingIndicator from './LoadingIndicator';
 import { Bookshelf } from '@prisma/client';
 
 export default function BookshelfList() {
 	const { bookshelves, isLoading } = useBookshelves();
 
 	if (isLoading) {
-		return <div>loading bookshelves</div>;
+		return <LoadingIndicator />;
 	}
 
 	return (

@@ -7,6 +7,7 @@ import useGoal from '../lib/hooks/useGoal';
 import useStats from '../lib/hooks/useStats';
 import { handleUnsuccessfulApiResponse } from '../lib/util';
 import Button from './Button';
+import LoadingIndicator from './LoadingIndicator';
 import SetGoalModal from './SetGoalModal';
 import { Goal } from '@prisma/client';
 
@@ -39,7 +40,7 @@ export default function GoalComponent() {
 				onClose={() => setIsSetGoalModalOpen(false)}
 				onSubmit={handleSetGoal}
 			/>
-			{isLoading && <div>loading goal</div>}
+			{isLoading && <LoadingIndicator />}
 			{!isLoading && (
 				<div className="flex flex-col gap-4 w-full md:w-1/2">
 					{!goal && (

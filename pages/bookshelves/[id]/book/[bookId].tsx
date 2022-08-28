@@ -7,6 +7,7 @@ import Button from '../../../../components/Button';
 import ConfirmationModal from '../../../../components/ConfirmationModal';
 import Dropdown from '../../../../components/Dropdown';
 import Input from '../../../../components/Input';
+import LoadingIndicator from '../../../../components/LoadingIndicator';
 import PageContainer from '../../../../components/PageContainer';
 import StarRating from '../../../../components/StarRating';
 import { ROUTES } from '../../../../lib/constants';
@@ -81,7 +82,7 @@ export default function BookComponent() {
 
 	return (
 		<PageContainer
-			title={isLoading ? 'Loading book...' : book?.title}
+			title={isLoading ? undefined : book?.title}
 			subtitle={
 				<div>
 					{book?.subtitle && <p>{book.subtitle}</p>}
@@ -111,7 +112,7 @@ export default function BookComponent() {
 				onSubmit={handleDeleteBook}
 				isDestructive
 			/>
-			{isLoading && <div>loading book</div>}
+			{isLoading && <LoadingIndicator />}
 			{book && (
 				<div className="flex flex-col gap-2 md:gap-6 md:w-1/2 w-full">
 					<div className="flex gap-2 md:gap-6">

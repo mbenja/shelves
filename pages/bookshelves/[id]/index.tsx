@@ -29,7 +29,7 @@ export default function BookshelfComponent() {
 	const bookshelfId = router.query['id']
 		? (router.query['id'] as string)
 		: undefined;
-	const { bookshelf, mutate } = useBookshelf(bookshelfId);
+	const { bookshelf, isLoading, mutate } = useBookshelf(bookshelfId);
 	const { books } = useBooks(bookshelfId);
 
 	async function handleRenameBookshelf(name: string): Promise<void> {
@@ -59,8 +59,8 @@ export default function BookshelfComponent() {
 
 	return (
 		<PageContainer
-			title={bookshelf ? bookshelf.name : 'Loading...'}
-			subtitle={<p>{books?.length ?? 0} books</p>}
+			title={isLoading ? '' : bookshelf?.name}
+			subtitle={isLoading ? undefined : <p>{books?.length ?? 0} books</p>}
 			headerButtons={
 				<div className="flex gap-2 h-fit">
 					<Link href={`/bookshelves/${bookshelf?.id}/addBook`} passHref>

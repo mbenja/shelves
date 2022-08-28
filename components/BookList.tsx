@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import useBooks from '../lib/hooks/useBooks';
 import { getAuthorsString } from '../lib/util/bookUtils';
+import LoadingIndicator from './LoadingIndicator';
 import { QuestionMarkCircleIcon } from '@heroicons/react/solid';
 import { Author, Book } from '@prisma/client';
 
@@ -9,7 +10,7 @@ export default function BookList({ bookshelfId }: { bookshelfId: string }) {
 	const { books, isLoading } = useBooks(bookshelfId);
 
 	if (isLoading) {
-		return <div>loading books</div>;
+		return <LoadingIndicator />;
 	}
 
 	return (

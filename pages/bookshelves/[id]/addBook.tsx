@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import Button from '../../../components/Button';
 import Input from '../../../components/Input';
+import LoadingIndicator from '../../../components/LoadingIndicator';
 import PageContainer from '../../../components/PageContainer';
 import StarRating from '../../../components/StarRating';
 import { ROUTES } from '../../../lib/constants';
@@ -15,7 +16,7 @@ import {
 	getAuthorsString,
 	mapOpenLibraryBookToBook
 } from '../../../lib/util/bookUtils';
-import { QuestionMarkCircleIcon, StarIcon } from '@heroicons/react/solid';
+import { QuestionMarkCircleIcon } from '@heroicons/react/solid';
 
 export default function AddBook() {
 	const [ISBN, setISBN] = useState('');
@@ -33,6 +34,8 @@ export default function AddBook() {
 		response && bookshelf
 			? mapOpenLibraryBookToBook(response[`ISBN:${ISBN}`], bookshelf.id)
 			: null;
+
+	const isLoadingOpenLibraryBook = shouldFetch && !book;
 
 	async function handleAddBook(): Promise<void> {
 		fetcher
@@ -56,7 +59,7 @@ export default function AddBook() {
 
 	return (
 		<PageContainer title={`Add a Book to ${bookshelf?.name}`}>
-			{!book && (
+			{!book && !isLoadingOpenLibraryBook && (
 				<div className="flex flex-col gap-2 md:w-1/4 w-full">
 					<p>Enter your book&apos;s ISBN to get started.</p>
 					<Input placeholder="ISBN" value={ISBN} onChange={(v) => setISBN(v)} />
@@ -68,6 +71,7 @@ export default function AddBook() {
 					/>
 				</div>
 			)}
+			{isLoadingOpenLibraryBook && <LoadingIndicator />}
 			{book && (
 				<div className="flex flex-col gap-4 md:w-1/2 w-full">
 					<p>
