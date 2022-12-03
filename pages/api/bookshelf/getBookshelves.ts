@@ -17,7 +17,7 @@ export default async function handler(
 				userId: token.userId
 			},
 			orderBy: {
-				name: 'desc'
+				name: 'asc'
 			}
 		});
 
